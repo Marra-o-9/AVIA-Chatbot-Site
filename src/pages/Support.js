@@ -1,28 +1,18 @@
-import React, { useState } from "react";
+import React from 'react';
+import { Container, TextField, Button, Typography } from '@mui/material';
 
-function Support() {
-  const [feedback, setFeedback] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`Feedback enviado: ${feedback}`);
-  };
-
+const Support = () => {
   return (
-    <div>
-      <h1>Feedback e Suporte</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Deixe seu feedback:</label>
-          <textarea
-            value={feedback}
-            onChange={(e) => setFeedback(e.target.value)}
-          />
-        </div>
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
+    <Container>
+      <Typography variant="h3" color="primary" gutterBottom>
+        Feedback e Suporte
+      </Typography>
+      <TextField label="Seu Feedback" multiline rows={4} fullWidth margin="normal" />
+      <Button variant="contained" color="primary">
+        Enviar Feedback
+      </Button>
+    </Container>
   );
-}
+};
 
 export default Support;

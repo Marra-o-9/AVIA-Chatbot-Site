@@ -1,12 +1,22 @@
-import React from "react";
+import React from 'react';
+import { Container, Typography, Button } from '@mui/material';
 
-function Home() {
+const Home = () => {
   return (
-    <div>
-      <h1>Página Inicial</h1>
-      <p>Bem-vindo! Aqui você encontra os melhores serviços para atender às suas necessidades.</p>
-    </div>
+    <Container>
+      <Typography variant="h2" color="primary" gutterBottom>
+        Bem-vindo à AVIA
+      </Typography>
+      <Typography variant="h6" color="textSecondary">
+        A AVIA é um chatbot especializado que ajuda a otimizar processos e economizar tempo.
+        Com inteligência artificial e aprendizado contínuo, ela se adapta às necessidades
+        de qualquer empresa.
+      </Typography>
+      <Button variant="contained" color="primary" href="/services">
+        Conheça nossos serviços
+      </Button>
+    </Container>
   );
-}
+};
 
 export default Home;

@@ -1,17 +1,20 @@
-import React, { useState } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import React from 'react';
+import { Container, Typography, Button } from '@mui/material';
 
-function Schedule() {
-  const [date, setDate] = useState(new Date());
+const Schedule = () => {
+  // Adicione aqui a lógica para calendário e disponibilidade
 
   return (
-    <div>
-      <h1>Agendamento</h1>
-      <Calendar onChange={setDate} value={date} />
-      <p>Data selecionada: {date.toDateString()}</p>
-    </div>
+    <Container>
+      <Typography variant="h3" color="primary" gutterBottom>
+        Agende uma Consulta
+      </Typography>
+      {/* Código do calendário aqui */}
+      <Button variant="contained" color="primary">
+        Agendar
+      </Button>
+    </Container>
   );
-}
+};
 
 export default Schedule;
