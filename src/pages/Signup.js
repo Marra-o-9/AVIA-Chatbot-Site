@@ -1,56 +1,87 @@
+// src/pages/Signup.js
 import React, { useState } from 'react';
-import { Container, TextField, Button, Typography } from '@mui/material';
+import { Typography, Container, TextField, Button, Grid } from '@mui/material';
 
-const Signup = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+function Signup() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Adicione validação e lógica de envio
+    console.log('Form submitted:', formData);
+    // Add your signup logic here
   };
 
   return (
-    <Container>
-      <Typography variant="h3" color="primary" gutterBottom>
+    <Container component="main" maxWidth="xs">
+      <Typography variant="h2" component="h1" gutterBottom>
         Cadastro
       </Typography>
       <form onSubmit={handleSubmit}>
-        <TextField
-          label="Nome"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="Email"
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="Senha"
-          name="password"
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-        />
-        <Button variant="contained" color="primary" type="submit">
-          Cadastrar
-        </Button>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Primeiro Nome"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Sobrenome"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Senha"
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" fullWidth>
+              Cadastrar
+            </Button>
+          </Grid>
+        </Grid>
       </form>
     </Container>
   );
-};
+}
 
 export default Signup;

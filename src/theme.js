@@ -6,8 +6,8 @@ const theme = createTheme({
       main: '#00bcd4',  // Ciano
     },
     background: {
-      default: '#000000',  // Preto
-      paper: '#1c1c1c',
+      default: '#121212',  // Preto
+      paper: '#1e1e1e',
     },
     text: {
       primary: '#ffffff',
