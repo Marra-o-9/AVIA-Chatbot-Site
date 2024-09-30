@@ -1,7 +1,7 @@
-// src/pages/Support.js
 import React, { useState } from 'react';
-import { Typography, Container, TextField, Button, Grid, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
+import { Typography, Container, TextField, Button, Grid, Accordion, AccordionSummary, AccordionDetails, Snackbar } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import axios from 'axios';
 
 function Support() {
   const [formData, setFormData] = useState({
@@ -9,6 +9,8 @@ function Support() {
     email: '',
     message: '',
   });
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,10 +20,17 @@ function Support() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Support form submitted:', formData);
-    // Add your support form submission logic here
+    try {
+      await axios.post('http://localhost:5000/api/support', formData);
+      setSnackbarMessage('Mensagem enviada com sucesso!');
+      setOpenSnackbar(true);
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      setSnackbarMessage('Erro ao enviar mensagem. Tente novamente.');
+      setOpenSnackbar(true);
+    }
   };
 
   const faqs = [
@@ -94,6 +103,12 @@ function Support() {
           ))}
         </Grid>
       </Grid>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        message={snackbarMessage}
+      />
     </Container>
   );
 }

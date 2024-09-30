@@ -1,4 +1,3 @@
-// src/pages/Services.js
 import React from 'react';
 import { Typography, Container, Grid, Card, CardContent, Button } from '@mui/material';
 
@@ -8,6 +7,10 @@ function Services() {
     { name: 'Empresarial', price: 'R$100/mês', features: ['Chatbot integrado', 'Treinamento personalizado', 'Acesso à API', 'Consultoria básica'] },
     { name: 'Empresarial Pro', price: 'R$200/mês', features: ['Chatbot integrado', 'Treinamento avançado', 'Acesso à API', 'Consultoria avançada', 'Features experimentais'] },
   ];
+
+  const handleRedirect = () => {
+    window.open('https://shopcidadao.com.br', '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <Container component="main" maxWidth="lg">
@@ -30,7 +33,11 @@ function Services() {
                     <li key={idx}>{feature}</li>
                   ))}
                 </ul>
-                <Button variant="contained" fullWidth>
+                <Button 
+                  variant="contained" 
+                  fullWidth 
+                  onClick={handleRedirect}
+                >
                   Selecionar
                 </Button>
               </CardContent>

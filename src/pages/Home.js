@@ -1,8 +1,15 @@
 import React from 'react';
 import { Typography, Container, Grid, Card, CardContent, Button, Box } from '@mui/material';
 import { Language, Event, ShoppingCart, ContactSupport } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+  const navigate = useNavigate();
+
+  const navigateTo = (path) => {
+    navigate(path);
+  };
+
   return (
     <Container component="main" maxWidth="lg">
       <Box sx={{ my: 4 }}>
@@ -63,10 +70,10 @@ function Home() {
 
       <Grid container spacing={4} sx={{ my: 4 }}>
         {[
-          { title: 'Funções', icon: <Language />, description: 'Descubra como a AVIA ajuda os funcionários a se adaptarem rapidamente às suas tarefas e responsabilidades.' },
-          { title: 'Cadastro', icon: <Event />, description: 'Saiba como a AVIA planeja coletar métricas e dados para melhorar continuamente o processo de integração.' },
-          { title: 'Serviços', icon: <ShoppingCart />, description: 'Explore nossos serviços personalizados, desde consultoria até soluções autônomas.' },
-          { title: 'Contato', icon: <ContactSupport />, description: 'Entre em contato conosco para obter mais informações ou esclarecer dúvidas.' },
+          { title: 'Funções', icon: <Language />, description: 'Descubra como a AVIA ajuda os funcionários a se adaptarem rapidamente às suas tarefas e responsabilidades.', path: '/functions' },
+          { title: 'Cadastro', icon: <Event />, description: 'Saiba como a AVIA planeja coletar métricas e dados para melhorar continuamente o processo de integração.', path: '/signup' },
+          { title: 'Serviços', icon: <ShoppingCart />, description: 'Explore nossos serviços personalizados, desde consultoria até soluções autônomas.', path: '/services' },
+          { title: 'Contato', icon: <ContactSupport />, description: 'Entre em contato conosco para obter mais informações ou esclarecer dúvidas.', path: '/support' },
         ].map((item, index) => (
           <Grid item xs={12} sm={6} key={index}>
             <Card>
@@ -80,7 +87,7 @@ function Home() {
                 <Typography variant="body2" sx={{ mb: 2 }}>
                   {item.description}
                 </Typography>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={() => navigateTo(item.path)}>
                   Ver detalhes
                 </Button>
               </CardContent>

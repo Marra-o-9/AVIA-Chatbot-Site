@@ -1,6 +1,6 @@
-// src/pages/Signup.js
 import React, { useState } from 'react';
-import { Typography, Container, TextField, Button, Grid } from '@mui/material';
+import { Typography, Container, TextField, Button, Grid, Snackbar } from '@mui/material';
+import axios from 'axios';
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -9,6 +9,8 @@ function Signup() {
     email: '',
     password: '',
   });
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,10 +20,17 @@ function Signup() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Add your signup logic here
+    try {
+      await axios.post('http://localhost:5000/api/signup', formData);
+      setSnackbarMessage('Cadastro realizado com sucesso!');
+      setOpenSnackbar(true);
+      setFormData({ firstName: '', lastName: '', email: '', password: '' });
+    } catch (error) {
+      setSnackbarMessage('Erro ao realizar cadastro. Tente novamente.');
+      setOpenSnackbar(true);
+    }
   };
 
   return (
@@ -80,6 +89,12 @@ function Signup() {
           </Grid>
         </Grid>
       </form>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+        message={snackbarMessage}
+      />
     </Container>
   );
 }

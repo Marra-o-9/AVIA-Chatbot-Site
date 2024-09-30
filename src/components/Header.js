@@ -1,4 +1,3 @@
-// src/components/Header.js
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { AppBar, Toolbar, Button, Container, Box } from '@mui/material';
@@ -16,10 +15,10 @@ function Header() {
             />
           </Box>
           <Button color="inherit" component={RouterLink} to="/">Início</Button>
-          <Button color="inherit" component={RouterLink} to="/schedule">Funções</Button>
+          <Button color="inherit" component={RouterLink} to="/functions">Funções</Button>
           <Button color="inherit" component={RouterLink} to="/services">Serviços</Button>
           <Button color="inherit" component={RouterLink} to="/signup">Cadastro</Button>
-          <Button color="inherit" component={RouterLink} to="/support">Suporte</Button>
+          <Button color="inherit" component={RouterLink} to="/support">Contato</Button>
         </Toolbar>
       </Container>
     </AppBar>

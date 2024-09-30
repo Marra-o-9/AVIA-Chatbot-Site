@@ -7,13 +7,13 @@ const Footer = () => {
       <Typography variant="body2" color="textSecondary" align="center">
         {'© '}
         {new Date().getFullYear()} {' '}
-        <Link color="primary" href="https://www.shoppingdocidadao.com.br/" target="_blank" rel="noopener">
+        <Link color="primary" href="https://shopcidadao.com.br" target="_blank" rel="noopener">
           Shopping do Cidadão
         </Link>
         . Todos os direitos reservados.
       </Typography>
       <Typography variant="body2" color="textSecondary" align="center" mt={1}>
-        Desenvolvido por AVIA Chatbot - Soluções inteligentes para o seu negócio.
+        Desenvolvido por VIA Dupla - Soluções inteligentes para o seu negócio.
       </Typography>
     </Box>
   );
