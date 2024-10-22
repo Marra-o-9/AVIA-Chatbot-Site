@@ -1,70 +1,133 @@
-# Getting Started with Create React App
+# AVIA-Chatbot-Site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+AVIA-Chatbot-Site é uma aplicação web para AVIA (Assistente Virtual de Inteligência Artificial), um assistente virtual projetado para facilitar a integração de novos funcionários nas empresas.
 
-## Available Scripts
+## Índice
 
-In the project directory, you can run:
+- [AVIA-Chatbot-Site](#avia-chatbot-site)
+  - [Índice](#índice)
+  - [Visão Geral do Projeto](#visão-geral-do-projeto)
+  - [Funcionalidades](#funcionalidades)
+  - [Tecnologias Utilizadas](#tecnologias-utilizadas)
+  - [Estrutura do Projeto](#estrutura-do-projeto)
+  - [Configuração e Instalação](#configuração-e-instalação)
+  - [Executando a Aplicação](#executando-a-aplicação)
+  - [Endpoints da API](#endpoints-da-api)
+  - [Banco de Dados](#banco-de-dados)
+  - [Personalização](#personalização)
+  - [Contribuindo](#contribuindo)
+  - [Licença](#licença)
 
-### `npm start`
+## Visão Geral do Projeto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+AVIA-Chatbot-Site é uma aplicação web baseada em React com um backend em Node.js. Ela fornece informações sobre os serviços da AVIA, permite o registro de usuários e oferece funcionalidades de suporte. O site é projetado com um tema de modo escuro e utiliza Material-UI para estilização.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Funcionalidades
 
-### `npm test`
+- Página inicial com uma visão geral dos serviços da AVIA
+- Página de funções detalhando as capacidades da AVIA
+- Página de serviços com diferentes níveis de serviço
+- Funcionalidade de registro de usuários
+- Página de suporte com formulário de contato e seção de FAQ
+- Design responsivo com modo escuro
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tecnologias Utilizadas
 
-### `npm run build`
+- Frontend:
+  - React
+  - Material-UI
+  - React Router
+- Backend:
+  - Node.js
+  - Express.js
+  - SQLite (com Sequelize ORM)
+- Outros:
+  - Axios para chamadas de API
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Estrutura do Projeto
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+AVIA-Chatbot-Site/
+│
+├── public/
+│   └── (arquivos estáticos)
+│
+├── src/
+│   ├── components/
+│   │   ├── Footer.js
+│   │   └── Header.js
+│   │
+│   ├── pages/
+│   │   ├── Functions.js
+│   │   ├── Home.js
+│   │   ├── Services.js
+│   │   ├── Signup.js
+│   │   └── Support.js
+│   │
+│   ├── App.css
+│   ├── App.js
+│   ├── index.js
+│   └── theme.js
+│
+├── .gitignore
+├── database.sqlite
+├── package.json
+├── package-lock.json
+├── README.md
+└── server.js
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Configuração e Instalação
 
-### `npm run eject`
+1. Clone o repositório:
+   ```
+   git clone https://github.com/seu-usuario/AVIA-Chatbot-Site.git
+   cd AVIA-Chatbot-Site
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Instale as dependências:
+   ```
+   npm install
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Crie um arquivo `.env` no diretório raiz e adicione as variáveis de ambiente necessárias.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Executando a Aplicação
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Inicie o servidor backend:
+   ```
+   node server.js
+   ```
 
-## Learn More
+2. Em um novo terminal, inicie o servidor de desenvolvimento React:
+   ```
+   npm start
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. Abra seu navegador e acesse `http://localhost:3000` para visualizar a aplicação.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Endpoints da API
 
-### Code Splitting
+- POST `/api/signup`: Registro de usuário
+- POST `/api/support`: Envio de mensagens de suporte
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Banco de Dados
 
-### Analyzing the Bundle Size
+O projeto utiliza SQLite como banco de dados. O arquivo do banco de dados (`database.sqlite`) é criado automaticamente quando você executa o servidor pela primeira vez. Ele contém duas tabelas:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `Users`: Armazena informações de registro de usuários
+- `Supports`: Armazena mensagens de suporte
 
-### Making a Progressive Web App
+## Personalização
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Para modificar o tema, edite o arquivo `src/theme.js`.
+- Para adicionar ou modificar páginas, crie ou edite arquivos no diretório `src/pages` e atualize o roteamento em `App.js`.
+- Para alterar os endpoints da API ou adicionar novos, modifique o arquivo `server.js`.
 
-### Advanced Configuration
+## Contribuindo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Contribuições são bem-vindas! Sinta-se à vontade para enviar um Pull Request.
 
-### Deployment
+## Licença
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Este projeto está licenciado sob a Licença MIT.
