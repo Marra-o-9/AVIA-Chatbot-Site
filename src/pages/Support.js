@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Typography, Container, TextField, Button, Grid, Accordion, AccordionSummary, AccordionDetails, Snackbar } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import axios from 'axios';
+import { motion, useAnimation, useInView } from 'framer-motion';
+
+const MotionContainer = motion(Container);
+const MotionTypography = motion(Typography);
+const MotionTextField = motion(TextField);
+const MotionButton = motion(Button);
+const MotionAccordion = motion(Accordion);
 
 function Support() {
   const [formData, setFormData] = useState({
@@ -39,77 +46,133 @@ function Support() {
     { question: 'Quais são os métodos de pagamento aceitos?', answer: 'Aceitamos cartões de crédito, transferências bancárias e boletos...' },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
+  const AnimatedSection = ({ children }) => {
+    const controls = useAnimation();
+    const ref = useRef(null);
+    const inView = useInView(ref, { once: true, amount: 0.3 });
+
+    useEffect(() => {
+      if (inView) {
+        controls.start('visible');
+      }
+    }, [controls, inView]);
+
+    return (
+      <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={controls}
+        variants={containerVariants}
+      >
+        {children}
+      </motion.div>
+    );
+  };
+
   return (
-    <Container component="main" maxWidth="lg">
-      <Typography variant="h2" component="h1" gutterBottom>
-        Suporte
-      </Typography>
-      
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <Typography variant="h4" gutterBottom>
-            Entre em Contato
-          </Typography>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              fullWidth
-              label="Nome"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              margin="normal"
-              required
-            />
-            <TextField
-              fullWidth
-              label="Email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              margin="normal"
-              required
-            />
-            <TextField
-              fullWidth
-              label="Mensagem"
-              name="message"
-              multiline
-              rows={4}
-              value={formData.message}
-              onChange={handleChange}
-              margin="normal"
-              required
-            />
-            <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-              Enviar
-            </Button>
-          </form>
-        </Grid>
+    <MotionContainer component="main" maxWidth="lg">
+      <AnimatedSection>
+        <MotionTypography variant="h2" component="h1" gutterBottom variants={itemVariants}>
+          Suporte
+        </MotionTypography>
         
-        <Grid item xs={12} md={6}>
-          <Typography variant="h4" gutterBottom>
-            Perguntas Frequentes
-          </Typography>
-          {faqs.map((faq, index) => (
-            <Accordion key={index}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>{faq.question}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{faq.answer}</Typography>
-              </AccordionDetails>
-            </Accordion>
-          ))}
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={6}>
+            <MotionTypography variant="h4" gutterBottom variants={itemVariants}>
+              Entre em Contato
+            </MotionTypography>
+            <form onSubmit={handleSubmit}>
+              <MotionTextField
+                fullWidth
+                label="Nome"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                margin="normal"
+                required
+                variants={itemVariants}
+              />
+              <MotionTextField
+                fullWidth
+                label="Email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                margin="normal"
+                required
+                variants={itemVariants}
+              />
+              <MotionTextField
+                fullWidth
+                label="Mensagem"
+                name="message"
+                multiline
+                rows={4}
+                value={formData.message}
+                onChange={handleChange}
+                margin="normal"
+                required
+                variants={itemVariants}
+              />
+              <MotionButton 
+                type="submit" 
+                variant="contained" 
+                sx={{ mt: 2 }}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Enviar
+              </MotionButton>
+            </form>
+          </Grid>
+          
+          <Grid item xs={12} md={6}>
+            <MotionTypography variant="h4" gutterBottom variants={itemVariants}>
+              Perguntas Frequentes
+            </MotionTypography>
+            {faqs.map((faq, index) => (
+              <MotionAccordion key={index} variants={itemVariants}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography>{faq.question}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>{faq.answer}</Typography>
+                </AccordionDetails>
+              </MotionAccordion>
+            ))}
+          </Grid>
         </Grid>
-      </Grid>
+      </AnimatedSection>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
         onClose={() => setOpenSnackbar(false)}
         message={snackbarMessage}
       />
-    </Container>
+    </MotionContainer>
   );
 }
 
